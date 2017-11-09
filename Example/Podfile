@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'ALTutorialVC_Example' do
+  pod 'ALTutorialVC', :path => '../'
+
+  target 'ALTutorialVC_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
