@@ -68,7 +68,7 @@ open class ALTutorialVC : UIViewController, TutorialProtocol, TutorialDataSource
     open func buttonConstraints(_ skipButton: UIButton) -> [NSLayoutConstraint]? {
         let views = ["skip": skipButton]
         let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[skip(80)]-10-|", options: NSLayoutFormatOptions.alignAllTrailing, metrics: nil, views: views)
-        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-10-[skip(36)]", options: NSLayoutFormatOptions.alignAllTop, metrics: nil, views: views)
+        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[skip(36)]", options: NSLayoutFormatOptions.alignAllTop, metrics: nil, views: views)
         
         
         return horizontalConstraints + verticalConstraints
