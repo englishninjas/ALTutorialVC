@@ -147,8 +147,6 @@ open class ALTutorialVC : UIViewController, TutorialProtocol, TutorialDataSource
         
         self.view.backgroundColor = UIColor.clear
         
-        setup()
-        
         if let bgView = tutorialBackgroundView() {
             self.view.addSubview(bgView)
         }
@@ -227,7 +225,7 @@ open class ALTutorialVC : UIViewController, TutorialProtocol, TutorialDataSource
                 }
             }
         }
-        
+        setup()
         
         self.view.isHidden = false
         
