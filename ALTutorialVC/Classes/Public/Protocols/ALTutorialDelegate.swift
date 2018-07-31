@@ -15,7 +15,7 @@ import Foundation
     /*
      |UIView| components to be introduced
      */
-    func tutorialViews() -> [UIView]
+    func tutorialViews(_ tutorialVC: ALTutorialVC) -> [UIView]
 }
 
 public protocol TutorialNavigationHandler {
@@ -54,21 +54,21 @@ extension UIViewController {
     /*
      Tutorial could not start, we will try next time
      */
-    func tutorialDidTimeout()
+    func tutorialDidTimeout(_ tutorialVC: ALTutorialVC)
     
-    func tutorialWillStart()
+    func tutorialWillStart(_ tutorialVC: ALTutorialVC)
     
-    func tutorialDidStart()
+    func tutorialDidStart(_ tutorialVC: ALTutorialVC)
     
-    func tutorialWillDismiss()
+    func tutorialWillDismiss(_ tutorialVC: ALTutorialVC)
     
-    func tutorialDidEnd()
+    func tutorialDidEnd(_ tutorialVC: ALTutorialVC)
     
     /*
      While fetching data or for some other reason,
      you may want to delay Tutorial, return NO
     */
-    func shouldTutorialStart() -> Bool
+    func shouldTutorialStart(_ tutorialVC: ALTutorialVC) -> Bool
 }
 
 public extension TutorialDelegate where Self: UIViewController {

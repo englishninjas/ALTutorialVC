@@ -27,6 +27,12 @@ open class ALTutorialVC : UIViewController, TutorialProtocol, TutorialDataSource
     
     public var arrows = [ArrowView]()
     
+    open var dismissByGesture: Bool {
+        get {
+            return true
+        }
+    }
+    
     @objc public weak var tutorialDelegate: TutorialDelegate?
     
     required public init?(coder aDecoder: NSCoder) {
@@ -59,7 +65,7 @@ open class ALTutorialVC : UIViewController, TutorialProtocol, TutorialDataSource
     }
     
     open func setup() {
-        if let childsArray = tutorialDelegate?.tutorialViews() {
+        if let childsArray = tutorialDelegate?.tutorialViews(self) {
             setupSources(childsArray)
             setupTargets(tutorialTargetViews())
         }
@@ -95,12 +101,13 @@ open class ALTutorialVC : UIViewController, TutorialProtocol, TutorialDataSource
             drawAnimated()
             
             if let delegate = tutorialDelegate {
-                delegate.tutorialDidStart()
+                delegate.tutorialDidStart(self)
             }
         }
     }
     
-    @objc public func playNextStep() {
+    @objc
+    public func playNextStep() {
         if !started {
             fatalError("|playNextStep| call me after tutorial has started!")
         }
@@ -171,7 +178,7 @@ open class ALTutorialVC : UIViewController, TutorialProtocol, TutorialDataSource
         super.viewWillAppear(animated)
         
         if let delegate = tutorialDelegate {
-            delegate.tutorialWillStart()
+            delegate.tutorialWillStart(self)
         }
     }
     
@@ -188,23 +195,24 @@ open class ALTutorialVC : UIViewController, TutorialProtocol, TutorialDataSource
     @objc private func startTimeout() {
         if !started {
             if let delegate = tutorialDelegate {
-                delegate.tutorialDidTimeout()
+                delegate.tutorialDidTimeout(self)
             }
         }
     }
     
-    private func dismiss() {
+    public func dismiss() {
         if let delegate = tutorialDelegate {
-            delegate.tutorialWillDismiss()
+            delegate.tutorialWillDismiss(self)
         }
         
         self.dismiss(animated: true,
                      completion: nil)
     }
     
-    @objc private func handle(gestureRecognizer: UIGestureRecognizer) {
+    @objc
+    private func handle(gestureRecognizer: UIGestureRecognizer) {
         if gestureRecognizer.state == .ended {
-            if index >= sourceCount() {
+            if dismissByGesture && index >= sourceCount() {
                 dismiss()
             }
         }
@@ -213,7 +221,7 @@ open class ALTutorialVC : UIViewController, TutorialProtocol, TutorialDataSource
     private func drawAnimated() {
         if let delegate = tutorialDelegate {
             var passedTime = 0
-            waitLoop: while !delegate.shouldTutorialStart() {
+            waitLoop: while !delegate.shouldTutorialStart(self) {
                 self.view.isHidden = true
                 usleep(10)
                 passedTime += 10
@@ -290,7 +298,7 @@ open class ALTutorialVC : UIViewController, TutorialProtocol, TutorialDataSource
     
     private func tutorialDidFinish() {
         if let delegate = tutorialDelegate {
-            delegate.tutorialDidEnd()
+            delegate.tutorialDidEnd(self)
         }
     }
     
@@ -311,10 +319,19 @@ open class ALTutorialVC : UIViewController, TutorialProtocol, TutorialDataSource
         print("\(String(describing: self)) |loadLocalizedStrings| Don't you have anything to localize!")
     }
     
+    open static func showedPreviously() -> Bool {
+        return UserDefaults.standard.bool(forKey: tutorialName())
+    }
+    
+    open static func tutorialName() -> String {
+        return description()
+    }
+    
     open func tutorialName() -> String {
-        print("\(String(describing: self)) |tutorialName| Its better if you override me!")
+        let name = type(of: self).tutorialName()
+        print("\(name) |tutorialName| Its better if you override me!")
         
-        return String(describing: self)
+        return name
     }
     
     open func sourceArrowDetail(index: Int) -> ArrowDetails {

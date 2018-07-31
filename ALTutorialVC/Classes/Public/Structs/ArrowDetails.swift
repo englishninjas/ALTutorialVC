@@ -13,7 +13,7 @@ public struct ArrowDetails {
     public var order: Order
     public var curved: Bool
     
-    public init(pos: Position, order: Order, curved: Bool) {
+    public init(pos: Position, order: Order, curved: Bool = false) {
         if (pos == .Right || pos == .Left) && UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft {
             self.position = pos == .Right ? .Left : .Right
         } else {
@@ -22,9 +22,5 @@ public struct ArrowDetails {
         
         self.order = order
         self.curved = curved
-    }
-    
-    public init(pos: Position, order: Order) {
-        self.init(pos: pos, order: order, curved: false)
     }
 }
