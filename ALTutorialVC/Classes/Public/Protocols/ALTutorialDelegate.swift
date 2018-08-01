@@ -19,7 +19,6 @@ import Foundation
 }
 
 public protocol TutorialNavigationHandler {
-    func segue() -> String
     func performTipsSegue(named: String)
 }
 
@@ -33,7 +32,7 @@ public extension TutorialNavigationHandler where Self: UIViewController {
 public protocol TutorialConsumer {
     func tutorialSource() -> TutorialViewSource
     func tutorialNavigationHandler() -> TutorialNavigationHandler
-    func showTutorial()
+    func showTutorial(namedSegue: String)
 }
 
 extension UIViewController {
@@ -91,13 +90,12 @@ public extension TutorialDelegate where Self: UIViewController {
 }
 
 public extension TutorialConsumer where Self: UIViewController {
-    public func showTutorial() {
+    public func showTutorial(namedSegue: String) {
         if visibleView() {
             toggleUserInteraction(false)
             
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
-                let segueName = self.tutorialNavigationHandler().segue()
-                self.tutorialNavigationHandler().performTipsSegue(named: segueName)
+                self.tutorialNavigationHandler().performTipsSegue(named: namedSegue)
                 
                 self.toggleUserInteraction(true)
             }
