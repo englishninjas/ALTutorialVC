@@ -211,7 +211,11 @@ open class ALTutorialVC : UIViewController, TutorialProtocol, TutorialDataSource
     
     @objc
     private func handle(gestureRecognizer: UIGestureRecognizer) {
-        if gestureRecognizer.state == .ended {
+        didGestureRecognize(gestureRecognizer)
+    }
+    
+    open func didGestureRecognize(_ gesture: UIGestureRecognizer) {
+        if gesture.state == .ended {
             if dismissByGesture && index >= sourceCount() {
                 dismiss()
             }
