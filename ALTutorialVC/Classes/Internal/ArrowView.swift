@@ -132,7 +132,7 @@ public struct Arrow {
             headLayer.fillColor = UIColor.clear.cgColor
             headLayer.lineWidth = CGFloat(lineWidth)
             headLayer.lineJoin = kCALineJoinBevel
-            
+//            CAShapeLayerLineJoin
             pathLayer.addSublayer(headLayer)
             arrowLayer = pathLayer
             

@@ -73,8 +73,8 @@ open class ALTutorialVC : UIViewController, TutorialProtocol, TutorialDataSource
     
     open func buttonConstraints(_ skipButton: UIButton) -> [NSLayoutConstraint]? {
         let views = ["skip": skipButton]
-        let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[skip(80)]-10-|", options: NSLayoutFormatOptions.alignAllTrailing, metrics: nil, views: views)
-        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[skip(36)]", options: NSLayoutFormatOptions.alignAllTop, metrics: nil, views: views)
+        let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[skip(80)]-10-|", options: NSLayoutConstraint.FormatOptions.alignAllTrailing, metrics: nil, views: views)
+        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[skip(36)]", options: NSLayoutConstraint.FormatOptions.alignAllTop, metrics: nil, views: views)
         
         
         return horizontalConstraints + verticalConstraints
@@ -323,11 +323,11 @@ open class ALTutorialVC : UIViewController, TutorialProtocol, TutorialDataSource
         print("\(String(describing: self)) |loadLocalizedStrings| Don't you have anything to localize!")
     }
     
-    open static func showedPreviously() -> Bool {
+    public static func showedPreviously() -> Bool {
         return UserDefaults.standard.bool(forKey: tutorialName())
     }
     
-    open static func tutorialName() -> String {
+    public static func tutorialName() -> String {
         return description()
     }
     
