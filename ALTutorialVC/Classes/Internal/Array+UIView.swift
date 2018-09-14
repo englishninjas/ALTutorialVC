@@ -21,7 +21,7 @@ internal extension Array where Element : UIView {
     }
     
     internal func bringAllSubviewsFront() -> Array {
-        self.forEach { $0.superview?.bringSubview(toFront: $0)}
+        self.forEach { $0.superview?.bringSubview(toFront: $0) }
         return self
     }
 }
