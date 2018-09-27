@@ -123,7 +123,7 @@ public struct Arrow {
             pathLayer.strokeColor = color.cgColor
             pathLayer.fillColor = UIColor.clear.cgColor
             pathLayer.lineWidth = CGFloat(lineWidth)
-            pathLayer.lineJoin = kCALineJoinBevel
+            pathLayer.lineJoin = CAShapeLayerLineJoin.bevel
             pathLayer.lineDashPattern = [10,8]
             
             let headLayer = CAShapeLayer()
@@ -131,7 +131,7 @@ public struct Arrow {
             headLayer.strokeColor = color.cgColor
             headLayer.fillColor = UIColor.clear.cgColor
             headLayer.lineWidth = CGFloat(lineWidth)
-            headLayer.lineJoin = kCALineJoinBevel
+            headLayer.lineJoin = CAShapeLayerLineJoin.bevel
 //            CAShapeLayerLineJoin
             pathLayer.addSublayer(headLayer)
             arrowLayer = pathLayer

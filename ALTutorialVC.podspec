@@ -18,10 +18,10 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-        This is an UI library to help to users to understand how your application's layout can be used
+        This is an UI library to help to users to understand how your application's layout can be used. You can build tutorials for your application's pages to direct users to use specific functionality of your application
                        DESC
 
-  s.homepage         = 'https://github.com/aligermiyanoglu/ALTutorialVC'
+  s.homepage         = 'https://github.com/englishninjas/ALTutorialVC'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'aligermiyanoglu' => 'enver@englishninjas.com' }
@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
-
+  s.swift_version = '4.2'
   s.source_files = 'ALTutorialVC/Classes/**/*'
   
   # s.resource_bundles = {
